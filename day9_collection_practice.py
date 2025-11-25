@@ -139,3 +139,53 @@ for name in logs:
         access_count[name] = 1
 
 print("アクセス回数の集計結果:", access_count)
+
+#| 記号   | データ型  | 一言で言うと   | 向いてる使い方         |
+#| ---- | ----- | -------- | --------------- |
+#| `()` | tuple | 変わらないセット | 座標、固定設定、変更禁止の情報 |
+#| `[]` | list  | 変えられる並び  | フルーツ、名前一覧、動くデータ |
+#| `{}` | dict  | キーと値の辞書  | 設定表、スコア表、対応表    |
+print("\n")
+# ------------------------------
+# Day9-006: (), [], {} を全部使うミニ実務サンプル
+# ------------------------------
+# ☆ この項目でやっていること
+# - list([]) の中に dict({}) を入れて、「アクセスログ一覧」を表現する
+# - 関数定義・関数呼び出しで () を使う
+# - ループでログを走査して「ユーザーごとの回数」を dict に集計する
+# ☆ こんな場面で使うイメージ
+# - Webアプリのアクセスログから「誰が何回アクセスしたか」を出す
+# - バッチ処理で「ユーザー別の件数」を数える
+# - ログ解析やレポート作成の一番シンプルな形
+
+print("---- Day9-006: (), [], {} 総まとめ ----")
+
+# [] + {} : list の中に dict を並べて「ログ一覧」を表現
+logs = [{"user": "kabo", "action": "login"},
+        {"user": "mikoto", "action": "view"},
+        {"user": "kabo", "action": "view"},
+        {"user": "gonzou", "action": "login"},
+        {"user": "kabo", "action": "logout"},
+]
+
+def summarize_access(log_list):
+    """ユーザーごとのアクセス回数を dict で返す関数"""
+    #{} : 結果をためる dict
+    counts = {}
+    for entry in log_list:
+        # [] : dictから値を取り出す
+        name = entry["user"]
+        if name in counts:
+            counts[name] += 1
+        else:
+            counts[name] = 1
+    return counts
+
+# () : 関数呼び出し
+result = summarize_access(logs)
+
+print("集計結果:", result)
+
+# おまけ: きれいに1行ずつ表示
+for name in sorted(result.keys()):
+    print(name, ":", result[name], "回")
