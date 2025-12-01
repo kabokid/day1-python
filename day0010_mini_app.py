@@ -57,7 +57,7 @@ for name in sorted(result.keys()):
     print(name, ":", result[name], "回")
 print("\n")
 # ------------------------------
-# Day10-004: login 回数だけ集計する
+# Day10-004: login 回数だけ集計する 
 # ------------------------------
 # ☆ この項目でやっていること
 # - 全ログの中から action が "login" のものだけを対象にする
